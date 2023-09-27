@@ -41,10 +41,9 @@ def GUI():
 
 
 if __name__ == "__main__":
-    # Einen Thread für die GUI erstellen
+
     gui_thread = threading.Thread(target=GUI)
     gui_thread.start()
 
-    # Einen Thread für die Methode legLos erstellen
     leglos_thread = threading.Thread(target=Hirn)
     leglos_thread.start()
