@@ -8,7 +8,7 @@ def Eingabe():
     sample_format = pyaudio.paInt16
     channels = 2
     fs = 44100
-    filename = f"C:\\output.wav"  # Pfad für die WAV-Datei
+    filename = f"C:\\Text_fuer_Rudolf.wav"  # Pfad für die WAV-Datei
 
     # Interface erstellen
     p = pyaudio.PyAudio()
