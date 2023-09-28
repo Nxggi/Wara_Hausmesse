@@ -29,15 +29,30 @@ def Hirn():
 
 
 def GUI():
+
+    def close():
+        fenster.destroy()
+        exit
     global fenster
     fenster = tk.Tk()
     fenster.title("Rudolf")
+    w, h = fenster.winfo_screenwidth(), fenster.winfo_screenheight()
+    fenster.overrideredirect(1)
+    fenster.geometry("%dx%d+0+0" % (w, h))
+    
 
     global label
-    label = tk.Label(fenster, text="Drücke M zum aufnehmen deiner Frage", font=("Arial", 24))
-    label.pack(padx=20, pady=20)
+    label = tk.Label(fenster, text="Drücke M zum aufnehmen deiner Frage", font=("Arial", 24), anchor="center" )
+    #label.pack(padx=20, pady=20)
+    label.place(relx=0.5, rely=0.5, anchor="center")
+
+
+    button1 = tk.Button(fenster, text="Rudolf Beenden", command=close, width=20, height=3)
+    button1.place(relx=0.5, rely=0.92, anchor="center")
+
 
     fenster.mainloop()
+
 
 
 if __name__ == "__main__":
