@@ -8,9 +8,12 @@ import threading
 import tkinter as tk
 import keyboard
 import time
+import os
+
+
 
 running = True
-
+global gif_label
 
 
 def update_gif():
@@ -27,9 +30,11 @@ def update_gif():
 
 
 def gif_vid():
+    Order_Verzeichnis = os.path.dirname(os.path.abspath(__file__))
+    Gif_Pfad = os.path.join(Order_Verzeichnis, "Loading.gif")
     global gif_image
     global gif_label
-    gif_image = Image.open(r"C:\Users\1000len-6476\Desktop\Wara Hausmesse\Loading.gif")
+    gif_image = Image.open(Gif_Pfad)
 
 
     frame = ImageTk.PhotoImage(gif_image)
