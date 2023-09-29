@@ -93,7 +93,7 @@ def Hirn():
         keyboard.wait("m")
         fenster.after(0, lambda: label.config(text="Recording..."))
         WAV_Pfad = Eingabe()
-        gif_label.pack()
+        gif_label.pack(expand=True)
         Gesprochenes = S2T(WAV_Pfad)
         gif_label.pack_forget()
         if Gesprochenes == "Error§$§$§$§$§$§$$$§":
