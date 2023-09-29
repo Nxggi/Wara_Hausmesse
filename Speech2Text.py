@@ -1,6 +1,7 @@
 import speech_recognition as sr
 
 def S2T(x):
+    text = "No Return"
     wav_file = x
     r = sr.Recognizer()
 
@@ -12,6 +13,6 @@ def S2T(x):
             text = r.recognize_google(audio, language="de-DE")
             
         except sr.UnknownValueError:
-            print("nicht funktioniert")
-    Gesprochenes = text
-    return Gesprochenes
+            text =     "Error§$§$§$§$§$§$$$§"
+    
+    return text
