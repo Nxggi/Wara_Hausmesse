@@ -11,12 +11,6 @@ import time
 
 running = True
 
-def start_gif_thread():
-    if __name__ == "__main__":
-        gif_thread = threading.Thread(target=gif_vid)
-        gif_thread.start()
-
-
 
 
 def update_gif():
@@ -69,12 +63,11 @@ def GUI():
     
     fenster = tk.Tk()
     fenster.title("Rudolf")
-    fenster.configure(bg="white")
     w, h = fenster.winfo_screenwidth(), fenster.winfo_screenheight()
     fenster.overrideredirect(1)
     fenster.geometry("%dx%d+0+0" % (w, h))
 
-    label = tk.Label(fenster, text="Drücke M zum Aufnehmen deiner Frage", font=("Arial", 24), anchor="center", bg="white")
+    label = tk.Label(fenster, text="Drücke M zum Aufnehmen deiner Frage", font=("Arial", 24), anchor="center")
     label.place(relx=0.5, rely=0.5, anchor="center")
    
 
@@ -87,14 +80,15 @@ def GUI():
 def Hirn():
     global gif_label  
     global running
-  
+    time.sleep(0.1)
+    gif_label.pack_forget()
     while running:
         WAV_Pfad = ""
         GPT_Antwort = ""
         keyboard.wait("m")
         fenster.after(0, lambda: label.config(text="Recording..."))
         WAV_Pfad = Eingabe()
-        start_gif_thread()
+        gif_label.pack()
         Gesprochenes = S2T(WAV_Pfad)
         gif_label.pack_forget()
         if Gesprochenes == "Error§$§$§$§$§$§$$$§":
@@ -102,13 +96,16 @@ def Hirn():
         GPT_Antwort = ChatGPT_temp()
         fenster.after(0, lambda: label.config(text=GPT_Antwort))
         Sprachausgabe(GPT_Antwort)
-        time.sleep(1)
+        time.sleep(0.1)
         fenster.after(0, lambda: label.config(text="Drücke M zum Aufnehmen deiner Frage"))
 
 
 
 
 if __name__ == "__main__":
+    gif_thread = threading.Thread(target=gif_vid)
+    gif_thread.start()
+    
     gui_thread = threading.Thread(target=GUI)
     gui_thread.start()
 
