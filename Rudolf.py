@@ -11,42 +11,51 @@ import time
 from tkinter import PhotoImage
 from PIL import Image, ImageTk
 
+running = True
 
 def Error_bei_Speech2text():
+        global running
         Error = "Das habe ich leider nicht verstanden, bitte stelle deine Frage erneut"
         fenster.after(0, lambda: label.config(text=Error))
         Sprachausgabe(Error)
         fenster.after(0, lambda: label.config(text="Drücke M zum aufnehmen deiner Frage"))
-        Hirn()
+        if running:
+            Hirn()
         
 
 def Hirn():
-    WAV_Pfad =""
-    GPT_Antwort =""
+    global running
+    while running:
+        WAV_Pfad =""
+        GPT_Antwort =""
 
-    keyboard.wait("m")
-    fenster.after(0, lambda: label.config(text="Recording..."))
-    WAV_Pfad = Eingabe()
-    fenster.after(0, lambda: label.config(text="Verarbeiten"))
-    Gesprochenes = S2T(WAV_Pfad)
-    if Gesprochenes == "Error§$§$§$§$§$§$$$§":
-        Error_bei_Speech2text()
-#    print(Gesprochenes)
-#    GPT_Antwort = ChatGPT(Gesprochenes) 
-    GPT_Antwort = ChatGPT_temp()
-    fenster.after(0, lambda: label.config(text=GPT_Antwort))
-    Sprachausgabe(GPT_Antwort)
-    time.sleep(1)
-    fenster.after(0, lambda: label.config(text="Drücke M zum aufnehmen deiner Frage"))
-    Hirn()
+        keyboard.wait("m")
+        fenster.after(0, lambda: label.config(text="Recording..."))
+        WAV_Pfad = Eingabe()
+        fenster.after(0, lambda: label.config(text="Verarbeiten"))
+        Gesprochenes = S2T(WAV_Pfad)
+        if Gesprochenes == "Error§$§$§$§$§$§$$$§":
+            Error_bei_Speech2text()
+    #    print(Gesprochenes)
+    #    GPT_Antwort = ChatGPT(Gesprochenes) 
+        GPT_Antwort = ChatGPT_temp()
+        fenster.after(0, lambda: label.config(text=GPT_Antwort))
+        Sprachausgabe(GPT_Antwort)
+        time.sleep(1)
+        fenster.after(0, lambda: label.config(text="Drücke M zum aufnehmen deiner Frage"))
+        Hirn()
 
 
 def GUI():
 
     def close():
+        global running
+        running = False
         fenster.destroy()
         exit()
-        
+
+
+
     global fenster
     fenster = tk.Tk()
     fenster.title("Rudolf")
