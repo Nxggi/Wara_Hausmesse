@@ -1,7 +1,7 @@
 import openai
 
 def ChatGPT(Gesprochenes):
-    text = Gesprochenes + ". Beantworte diese Frage in 3 Sätzen und auf Englisch"
+    text = Gesprochenes + ". Beantworte diese Frage in 3 Sätzen, Schreibe deine Antwort so als würdest du in einer Konversation auf die Frage antworten"
 
     #openai.api_key = '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'
     #-- Neuer OPEN AI API Key einfügen --# 
