@@ -6,7 +6,8 @@ Folgende Libarys müssen installiert sein:
 openai
 
 -  threading
--  tkinter 
+-  tkinter
+-  test123
 -  time
 -  os
 -  speech_recognition 
