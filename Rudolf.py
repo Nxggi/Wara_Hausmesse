@@ -1,7 +1,7 @@
 from Speech2Text import S2T
 from Spracheingabe import Eingabe
 from ChatGPT import ChatGPT
-from ChatGPT import ChatGPT_temp
+#from ChatGPT import ChatGPT_temp
 from Sprachausgabe import Sprachausgabe
 from PIL import Image, ImageTk
 import threading
@@ -98,7 +98,7 @@ def Hirn():
         gif_label.pack_forget()
         if Gesprochenes == "Error§$§$§$§$§$§$$$§":
             Error_bei_Speech2text()
-        GPT_Antwort = ChatGPT_temp()
+        GPT_Antwort = ChatGPT()
         fenster.after(0, lambda: label.config(text=GPT_Antwort))
         Sprachausgabe(GPT_Antwort)
         time.sleep(0.1)
