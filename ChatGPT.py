@@ -3,7 +3,7 @@ import openai
 def ChatGPT(Gesprochenes):
     text = Gesprochenes + ". Beantworte diese Frage in 3 Sätzen, Schreibe deine Antwort so als würdest du in einer Konversation auf die Frage antworten"
 
-    openai.api_key = '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'
+    openai.api_key = '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'
     response = openai.Completion.create(
         engine='text-davinci-003', 
         prompt=text,
