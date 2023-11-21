@@ -35,10 +35,10 @@ def gif_vid():
     global running
     if running:
         Order_Verzeichnis = os.path.dirname(os.path.abspath(__file__))
-        Gif_Pfad = os.path.join(Order_Verzeichnis, "Loading.gif")
+        Gif_Pfad = os.path.join(Order_Verzeichnis, "Reden.gif")
         gif_image = Image.open(Gif_Pfad)
         frame = ImageTk.PhotoImage(gif_image)
-        gif_label = tk.Label(fenster, image=frame)
+        gif_label = tk.Label(fenster, image=frame, bg="black")
         gif_label.pack()
         fenster.after(100, update_gif)
         fenster.mainloop()
@@ -49,10 +49,12 @@ def Error_bei_Speech2text():
     global running
     Error = "Das habe ich leider nicht verstanden, bitte stelle deine Frage erneut"
 
-    fenster.after(0, lambda: label.config(text=Error))
+    gif_label.pack(expand=True)
     Sprachausgabe(Error)
+    gif_label.pack_forget()
+    
     label2["text"] = "Achtung! Das Gepsrochene wird mit Google TTS bearbeitet."
-    fenster.after(0, lambda: label.config(text="Drücke M zum Aufnehmen deiner Frage"))
+    label["text"]= "Drücke M zum Aufnehmen deiner Frage"
     if running:
         Hirn()
 
@@ -69,19 +71,20 @@ def GUI():
         
     
     fenster = tk.Tk()
-    fenster.title("Rudolf")
+    fenster.title("Chatbot")
     w, h = fenster.winfo_screenwidth(), fenster.winfo_screenheight()
-    fenster.overrideredirect(1)
-    fenster.geometry("%dx%d+0+0" % (w, h))
-
-    label = tk.Label(fenster, text="Drücke M zum Aufnehmen deiner Frage", font=("Arial", 24), anchor="center")
+    #fenster.overrideredirect(1)
+    #fenster.geometry("%dx%d+0+0" % (w, h))
+    fenster.geometry("1200x800")
+    fenster.configure(bg="black")
+    label = tk.Label(fenster, text="Drücke M zum Aufnehmen deiner Frage", font=("Arial", 24), anchor="center",bg="black", fg="white")
     label.place(relx=0.5, rely=0.5, anchor="center")
    
-    label2 = tk.Label(fenster, text="Achtung! Das Gepsrochene wird mit Google TTS bearbeitet.",font=("Arial", 12, "bold"), anchor="center", fg='red')
+    label2 = tk.Label(fenster, text="Achtung! Das Gepsrochene wird mit Google TTS bearbeitet.",font=("Arial", 12, "bold"), anchor="center", fg='red', bg="black")
     label2.place(relx=0.5, rely=0.2, anchor="center")
    
 
-    button1 = tk.Button(fenster, text="Rudolf Beenden", command=close, width=20, height=3)
+    button1 = tk.Button(fenster, text="Rudolf Beenden", command=close, width=20, height=3,bg="black", fg="white")
     button1.place(relx=0.5, rely=0.92, anchor="center")
 
     fenster.mainloop()
@@ -99,19 +102,23 @@ def Hirn():
     #fenster.after(0, lambda: label.config(text="Recording..."))
     label["text"] = "Recording..."
     WAV_Pfad = Eingabe()
-    gif_label.pack(expand=True)
+    #gif_label.pack(expand=True)
+    label["text"] = "Verarbeiten..."
     Gesprochenes = S2T(WAV_Pfad)
-    gif_label.pack_forget()
+    #gif_label.pack_forget()
+    label["text"] = ""
     if Gesprochenes == "Error§$§$§$§$§$§$$$§":
         Error_bei_Speech2text()
     GPT_Antwort = ChatGPT_temp()
-    fenster.after(0, lambda: label.config(text=GPT_Antwort))
+
+    gif_label.pack(expand=True)
     Sprachausgabe(GPT_Antwort)
+    gif_label.pack_forget()
     time.sleep(0.1)
     #fenster.after(0, lambda: label.config(text="Drücke M zum Aufnehmen deiner Frage"))
     label["text"]= "Drücke M zum Aufnehmen deiner Frage"
     label2["text"] = "Achtung! Das Gepsrochene wird mit Google TTS bearbeitet."
-    
+    Hirn()
 
 
 
