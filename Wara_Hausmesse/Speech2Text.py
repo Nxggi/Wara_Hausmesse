@@ -1,7 +1,6 @@
 import speech_recognition as sr
 
 def S2T(x):
-    text = "No Return"
     wav_file = x
     r = sr.Recognizer()
 
